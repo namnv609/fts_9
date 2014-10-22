@@ -37,6 +37,46 @@
 		'controller' => 'users',
 		'action' => 'logout'
 	));
+	
+	Router::connect(ADMIN_ALIAS, array(
+		'controller' => 'home',
+		'action' => 'index',
+		'admin' => TRUE
+	));
+	Router::connect(ADMIN_ALIAS . '/questions', array(
+		'controller' => 'questions',
+		'action' => 'index',
+		'admin' => TRUE
+	));
+	Router::connect(ADMIN_ALIAS . '/questions/add',
+		array(
+			'controller' => 'questions',
+			'action' => 'edit',
+			'admin' => TRUE,
+			'id' => 0
+		),
+		array(
+			'pass' => array('id'),
+			'id' => '[0]'
+		)
+	);
+	Router::connect(ADMIN_ALIAS . '/questions/:id',
+		array(
+			'controller' => 'questions',
+			'action' => 'edit',
+			'admin' => TRUE,
+			'id' => 0
+		),
+		array(
+			'pass' => array('id'),
+			'id' => '[0-9]+'
+		)
+	);
+	Router::connect(ADMIN_ALIAS . '/questions/save', array(
+		'controller' => 'questions',
+		'action' => 'save',
+		'admin' => TRUE
+	));
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

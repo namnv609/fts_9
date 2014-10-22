@@ -36,7 +36,7 @@
 						<li class="user dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown">
 								<img src="http://placehold.it/500" alt="">
-								<span><?php echo $this->Session->read("UserSession.userName"); ?></span>
+								<span><?php echo $this->Session->read("Auth.User.name"); ?></span>
 								<i class="caret"></i>
 							</a>
 							<ul class="dropdown-menu">
@@ -44,8 +44,8 @@
 									<?php
 										echo $this->Html->link(
 											'<i class="fa fa-user"></i> ' . __('Profile'),
-											ADMIN_ALIAS . '/user-profile-' . 
-												$this->Session->read("UserSession.userID"),
+											ADMIN_ALIAS . '/users/' . 
+												$this->Session->read("Auth.User.id"),
 											$linkDefaults
 										);
 									?>
@@ -73,7 +73,7 @@
 				<div class="logo">
 					<?php
 						echo $this->Html->link(
-							'<img src="img/admin/logo.png" alt="">',
+							$this->Html->image('admin/logo.png'),
 							ADMIN_ALIAS,
 							$linkDefaults
 						);
@@ -100,15 +100,6 @@
 									);
 								?>
 							</li>
-							<li>
-								<?php
-									echo $this->Html->link(
-										'&raquo; ' . __('Website configuration'),
-										ADMIN_ALIAS .  '/website-configuration',
-										$linkDefaults
-									);
-								?>
-							</li>
 						</ul>
 					</li>
 					<li class="active">
@@ -118,7 +109,7 @@
 								<?php
 									echo $this->Html->link(
 										'&raquo; ' . __('Subjects Manage'),
-										ADMIN_ALIAS .  '/subjects-manage',
+										ADMIN_ALIAS .  '/subjects',
 										$linkDefaults
 									);
 								?>
@@ -127,7 +118,7 @@
 								<?php
 									echo $this->Html->link(
 										'&raquo; ' . __('Add new subject'),
-										ADMIN_ALIAS .  '/add-new-subject',
+										ADMIN_ALIAS .  '/subjects/add',
 										$linkDefaults
 									);
 								?>
@@ -141,7 +132,7 @@
 								<?php
 									echo $this->Html->link(
 										'&raquo; ' . __('Questions Manage'),
-										ADMIN_ALIAS .  '/questions-manage',
+										ADMIN_ALIAS .  '/questions',
 										$linkDefaults
 									);
 								?>
@@ -150,7 +141,7 @@
 								<?php
 									echo $this->Html->link(
 										'&raquo; ' . __('Add new Question'),
-										ADMIN_ALIAS .  '/add-new-question',
+										ADMIN_ALIAS .  '/questions/add',
 										$linkDefaults
 									);
 								?>
@@ -161,7 +152,7 @@
 						<?php
 							echo $this->Html->link(
 								'<i class="fa fa-user"></i>' . __('Examinations Manage'),
-								ADMIN_ALIAS . '/examinations-manage',
+								ADMIN_ALIAS . '/examinations',
 								$linkDefaults
 							);
 						?>
@@ -170,7 +161,7 @@
 						<?php
 							echo $this->Html->link(
 								'<i class="fa fa-user"></i>' . __('Users Manage'),
-								ADMIN_ALIAS . '/users-manage',
+								ADMIN_ALIAS . '/users',
 								$linkDefaults
 							);
 						?>
