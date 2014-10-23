@@ -77,6 +77,40 @@
 		'action' => 'save',
 		'admin' => TRUE
 	));
+	Router::connect(ADMIN_ALIAS . '/subjects', array(
+		'controller' => 'subjects',
+		'action' => 'index',
+		'admin' => TRUE
+	));
+	Router::connect(ADMIN_ALIAS . '/subjects/add',
+		array(
+			'controller' => 'subjects',
+			'action' => 'edit',
+			'admin' => TRUE,
+			'id' => 0
+		),
+		array(
+			'pass' => array('id'),
+			'id' => '[0]'
+		)
+	);
+	Router::connect(ADMIN_ALIAS . '/subjects/:id',
+		array(
+			'controller' => 'subjects',
+			'action' => 'edit',
+			'admin' => TRUE,
+			'id' => 0
+		),
+		array(
+			'pass' => array('id'),
+			'id' => '[0-9]+'
+		)
+	);
+	Router::connect(ADMIN_ALIAS . '/subjects/save', array(
+		'controller' => 'subjects',
+		'action' => 'save',
+		'admin' => TRUE
+	));
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
