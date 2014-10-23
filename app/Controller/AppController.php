@@ -3,7 +3,10 @@
 App::uses('Controller', 'Controller');
 
 class AppController extends Controller {
-
+	
+	public $helpers = array('Custom');
+	
+	public static $ITEM_PER_PAGE = 15;
 	public $components = array(
 		'Session',
 		'Cookie',
