@@ -43,6 +43,25 @@ class User extends AppModel {
 				'rule' => 'notEmpty',
 				'message' => 'Password is required'
 			)
+		),
+		'userUpdate' => array(
+			'name' => array(
+				'rule' => 'notEmpty',
+				'message' => 'Name is required'
+			),
+			'password' => array(
+				'rule' => array('minLength', 8),
+				'message' => 'Password require minimum 8 characters long'
+			),
+			'confirm_password' => array(
+				'rule' => array('compareTwoFields', 'password'),
+				'message' => 'Confirm password does not match'
+			),
+			'avatar' => array(
+				'rule' => array('extension', array('png', 'jpg', 'bmp', 'jpeg')),
+				'message' => 'Please supply a valid image (png, jpg, bmp, jpeg)',
+				'last' => TRUE
+			)
 		)
 	);
 	
