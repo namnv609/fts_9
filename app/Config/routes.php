@@ -132,6 +132,22 @@
 		'controller' => 'users',
 		'action' => 'save'
 	));
+	Router::connect(ADMIN_ALIAS . '/examinations', array(
+		'controller' => 'examinations',
+		'action' => 'index',
+		'admin' => TRUE
+	));
+	Router::connect(ADMIN_ALIAS . '/examinations/:id',
+		array(
+			'controller' => 'examinations',
+			'action' => 'view',
+			'admin' => TRUE
+		),
+		array(
+			'pass' => array('id'),
+			'id' => '[0-9]+'
+		)
+	);
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
