@@ -15,6 +15,14 @@ class UsersController extends AppController {
 	}
 	
 	public function index() {
+		$userID = $this->Auth->user('id');
+		$user = $this->User->findById($userID);
+		
+		if (count($user) > 0) {
+			$this->request->data = $user;
+		} else {
+			$this->redirect('/login');
+		}
 	}
 	
 	public function register() {
@@ -123,7 +131,7 @@ class UsersController extends AppController {
 			$user = $this->request->data["User"];
 			$this->User->setValidation("userUpdate");
 			$userID = $this->Auth->user('id');
-			$redirectUrl = "/profile/" . $userID;
+			$redirectUrl = "/profile/";
 			$userFields = array("name");
 			
 			if ($this->Auth->user('admin') == 1) {
@@ -133,8 +141,9 @@ class UsersController extends AppController {
 				$layout = "admin";
 			}
 			
-			$userAvatar = $this->__uploadAvatar($user["avatar"], $userID);
-			
+			if (!empty($user["avatar"])) {
+				$userAvatar = $this->__uploadAvatar($user["avatar"], $userID);
+			}
 			if (!empty($user["password"])) {
 				$userFields[] = "password";
 				$userFields[] = "confirm_password";
@@ -144,12 +153,21 @@ class UsersController extends AppController {
 			) {
 				$user["avatar"] = $userAvatar;
 				$userFields[] = "avatar";
+			} else {
+				$userAvatar = $this->Auth->user("avatar");
 			}
 			
+			$user["id"] = $userID;
 			$this->User->set($user);
 			
 			if ($this->User->save(NULL, TRUE, $userFields)) {
 				$this->Session->setFlash(__('Update user info successful.'));
+				
+				if ($user["id"] == $this->Auth->user("id")) {
+					$user["avatar"] = $userAvatar;
+					$this->Auth->login($user);
+				}
+				
 				$this->redirect($redirectUrl);
 			}
 		}
