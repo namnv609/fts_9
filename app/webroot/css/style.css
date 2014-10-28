@@ -1,0 +1,159 @@
+body {
+  font-size: 14px;
+}
+
+h1 {
+  font-weight: bold !important;
+}
+
+li {
+  list-style-type: none;
+}
+
+.top-nav {
+  background: #333;
+  margin-bottom: 15px;
+}
+
+.logo {
+  font-size: 22px !important;
+}
+.logo a {
+  font-weight: bold !important;
+}
+
+.panel {
+  border-radius: 5px;
+  border: 0 !important;
+  text-align: center;
+}
+.panel h1 {
+  font-weight: bold;
+}
+
+.sign-up-btn {
+  border-radius: 5px !important;
+}
+
+footer {
+  margin-top: 20px;
+}
+footer .boder {
+  padding-top: 5px;
+  border-top: 1px solid #ccc;
+}
+footer .boder .left {
+  float: left;
+}
+footer .boder .right {
+  margin: 0;
+  padding: 0;
+  float: right;
+  margin-top: -5px;
+}
+footer .boder .right li {
+  list-style-type: none;
+  float: left;
+  margin-left: 10px;
+}
+footer .boder .right li a {
+  color: #666;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.sign-form h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.sign-form input {
+  border-radius: 5px !important;
+}
+.sign-form input[type="button"], .sign-form input[type="submit"] {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.sign-form .new-user {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.list-checkbox {
+  border: 2px solid #ccc;
+  width: 200px;
+  height: 105px !important;
+  overflow-y: scroll;
+  padding: 10px;
+  border-radius: 5px;
+}
+.list-checkbox input {
+  margin-bottom: 10px !important;
+}
+
+.select-course {
+  width: 200px !important;
+  margin-left: 15px;
+  border-radius: 5px;
+}
+
+.fll {
+  float: left;
+}
+
+.start-btn {
+  margin-left: 15px;
+  border-radius: 5px;
+  padding-top: 9px !important;
+  padding-bottom: 9px !important;
+}
+
+.exam-panel {
+  margin-top: 20px;
+}
+.exam-panel .exam-panel-inner {
+  border-top: 1px solid #999;
+}
+.exam-panel .exam-check, .exam-panel .exam-date {
+  margin-top: 10px;
+  font-size: 14px;
+}
+.exam-panel .exam-date {
+  font-weight: bold;
+  font-size: 14px;
+}
+.exam-panel .exam-item {
+  font-size: 14px;
+  margin-top: 15px;
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
+  padding: 6px 0;
+  margin-left: 20px;
+}
+
+.answer {
+  margin-top: 10px;
+}
+.answer li {
+  font-size: 14px;
+  float: none;
+}
+.answer li input {
+  margin: 0 !important;
+}
+
+.large-12 input[type=radio] {
+	float: left;
+	width: auto;
+	margin: 0 10px 0 0;
+	line-height: 40px;
+}
+.large-12 input[type=radio] + label {
+	display: block !important;
+}
+.user-profile-img {
+	width: 100px;
+	height: 100px;
+}
+.padding-tb {
+	padding: 10px 0;
+}
