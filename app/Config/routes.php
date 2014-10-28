@@ -37,6 +37,10 @@
 		'controller' => 'users',
 		'action' => 'logout'
 	));
+	Router::connect('/profile', array(
+		'controller' => 'users',
+		'action' => 'index'
+	));
 	
 	Router::connect(ADMIN_ALIAS, array(
 		'controller' => 'home',
