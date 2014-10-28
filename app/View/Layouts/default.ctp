@@ -81,6 +81,7 @@
 			'jquery.min',
 			'foundation.min'
 		));
+		echo $scripts_for_layout;
 		?>
 		<script>
 			$(document).foundation();

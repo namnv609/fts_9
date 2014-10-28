@@ -5,10 +5,54 @@ class ExaminationsController extends AppController {
 	public $uses =array(
 		"User",
 		"Subject",
-		"Examination"
+		"Examination",
+		"Question",
+		"AnswersSheet"
 	);
 	
 	public function index() {
+	}
+	
+	public function add() {
+		if ($this->request->is("post")) {
+			$this->Question->unbindModel(array(
+				"hasMany" => array(
+					"AnswersSheet",
+					"Answer"
+				)
+			));
+			
+			$examination = $this->request->data;
+			$userID = $this->Auth->user("id");
+			$examination["Examination"]["user_id"] = $userID;
+			$subjects = $this->Question->find("all", array(
+				"conditions" => array(
+					"Question.subject_id" => $examination["Examination"]["subject_id"]
+				),
+				"limit" => 20,
+				"order" => "rand()"
+			));
+			
+			if ($this->Examination->save($examination)) {
+				$examinationID = $this->Examination->id;
+				$answersSheets = array();
+				
+				foreach ($subjects as $subject) {
+					$answersSheets[]["AnswersSheet"] = array(
+						"user_id" => $userID,
+						"examination_id" => $examinationID,
+						"question_id" => $subject["Question"]["id"]
+					);
+				}
+				
+				$this->AnswersSheet->create();
+				if (!$this->AnswersSheet->saveMany($answersSheets)) {
+					throw new Exception(__("An error occurred when trying add new examination."));
+				}
+			}
+		}
+		
+		$this->redirect('/');
 	}
 	
 	public function admin_index() {
