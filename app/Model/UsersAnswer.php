@@ -53,4 +53,38 @@ class UsersAnswer extends AppModel {
 		
 		return $answerIDs;
 	}
+	
+	/**
+	 * Get answer correct status
+	 * 
+	 * @param array $answerSheetIDs List answer sheet
+	 * @return array List status correct of answer
+	 */
+	public function answerCorrect($answerSheetIDs) {
+		$this->unbindModel(array(
+			"belongsTo" => array(
+				"AnswersSheet",
+				"Answer"
+			)
+		));
+		
+		$answerCorrect = $this->find("list", array(
+			"conditions" => array(
+				"answers_sheet_id" => array_keys($answerSheetIDs)
+			),
+			"group" => "answers_sheet_id",
+			"fields" => array(
+				"id",
+				"answer_correct"
+			)
+		));
+		
+		if (count($answerCorrect) <= 0) {
+			foreach ($answerSheetIDs as $id) {
+				$answerCorrect[$id] = 0;
+			}
+		}
+		
+		return $answerCorrect;
+	}
 }

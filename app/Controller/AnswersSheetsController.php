@@ -51,6 +51,10 @@ class AnswersSheetsController extends AppController {
 				strtotime($startTime["AnswersSheet"]["start"]
 			))
 		);
+		$isCorrect = array(
+			0 => FALSE,
+			1 => TRUE
+		);
 		
 		$this->set(
 			array(
@@ -62,7 +66,9 @@ class AnswersSheetsController extends AppController {
 				"subject",
 				"startTime",
 				"userAnswers",
-				"endTime"
+				"endTime",
+				"answerCorrect",
+				"isCorrect"
 			),
 			array(
 				$questions,
@@ -73,14 +79,52 @@ class AnswersSheetsController extends AppController {
 				$subject,
 				$startTime,
 				$this->UsersAnswer->prepareUserAnswers($questionIDs),
-				$endTime
+				$endTime,
+				$this->UsersAnswer->answerCorrect($questionIDs),
+				$isCorrect
 			)
 		);
 		
 		if ($this->Auth->user("admin") == 1) {
 			$this->layout = "admin";
+			$this->view = "admin_index";
 		} else {
 			$this->layout = "default";
 		}
+	}
+	
+	public function admin_check() {
+		if ($this->request->is("post")) {
+			$this->loadModel("Examination");
+			$userAnswers = $this->request->data["Answer"];
+			$answerCheck = array();
+			
+			foreach ($userAnswers as $id => $answer) {
+				$answerCheck["UsersAnswer"][] = array(
+					"id" => $id,
+					"answer_correct" => $answer["answer_correct"]
+				);
+			}
+			
+			$examinationID = $this->AnswersSheet->find("list", array(
+				"conditions" => array(
+					"AnswersSheet.id" => $answerCheck["UsersAnswer"][0]['id']
+				),
+				"fields" => array("AnswersSheet.examination_id")
+			));
+			$answerCheck["Examination"] = array(
+				"id" => reset($examinationID),
+				"status" => 2
+			);
+			
+			if (!$this->UsersAnswer->saveAll($answerCheck["UsersAnswer"])) {
+				throw new Exception(__("An error occurred. Please try again later"));
+			} else {
+				$this->loadModel('Examination');
+				$this->Examination->save($answerCheck["Examination"]);
+			}
+		}
+		
+		$this->redirect(array("controller" => "examinations", "action" => "index", "admin" => TRUE));
 	}
 }

@@ -152,17 +152,21 @@
 		'action' => 'index',
 		'admin' => TRUE
 	));
-	Router::connect(ADMIN_ALIAS . '/examinations/:id',
+	Router::connect(ADMIN_ALIAS . '/answers_sheets/:id',
 		array(
-			'controller' => 'examinations',
-			'action' => 'view',
-			'admin' => TRUE
+			'controller' => 'answers_sheets',
+			'action' => 'index'
 		),
 		array(
 			'pass' => array('id'),
 			'id' => '[0-9]+'
 		)
 	);
+	Router::connect(ADMIN_ALIAS . '/answers_sheets/check',array(
+		'controller' => 'answers_sheets',
+		'action' => 'check',
+		'admin' => TRUE
+	));
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
