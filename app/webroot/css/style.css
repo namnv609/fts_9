@@ -157,3 +157,25 @@ footer .boder .right li a {
 .padding-tb {
 	padding: 10px 0;
 }
+
+/*Custom CSS*/
+p.answer-correct {
+	padding: 0 0 0 50px;
+	margin-bottom: 0 !important;
+	color: #F00;
+	text-align: right;
+}
+p.answer-correct:before {
+	content: "- "
+}
+.question {
+	font: bold 16px tahoma, verdana, sans-serif;
+}
+
+form > .row {
+	border-bottom: 1px dashed #CCC;
+	padding: 5px 0;
+}
+form > .row:last-child {
+	border-bottom: none;
+}

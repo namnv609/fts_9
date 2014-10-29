@@ -22,7 +22,8 @@
 				"multiple" => "checkbox",
 				"label" => $answerLabel[$question["Question"]["type"]],
 				"readonly" => "readonly",
-				"value" => $userAnswers["Answers"][$answerSheetID]
+				"value" => $userAnswers["Answers"][$answerSheetID],
+				"disabled" => TRUE
 			));
 
 			echo $this->Form->input("Answer.$userAnswerID.answer_correct", array(
