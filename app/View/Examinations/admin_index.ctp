@@ -85,7 +85,7 @@
 					<?php
 						echo $this->Html->link(
 							'<i class="fa fa-pencil"></i>',
-							ADMIN_ALIAS . '/examinations/' . $examination["Examination"]["id"],
+							ADMIN_ALIAS . '/answers_sheets/' . $examination["Examination"]["id"],
 							array(
 								"escape" => FALSE,
 								"class" => "btn btn-primary btn-sm"

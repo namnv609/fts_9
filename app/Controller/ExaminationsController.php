@@ -60,8 +60,9 @@ class ExaminationsController extends AppController {
 		$searchConditions = array();
 		$examinationStatus = array(
 			"" => __("---Status---"),
-			"1" => __("Checked"),
-			"0" => __("Uncheck")
+			"0" => __("Not yet started"),
+			"1" => __("Unchecked"),
+			"2" => __("Checked")
 		);
 		
 		if (isset($queryString["user"])

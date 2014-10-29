@@ -3745,3 +3745,19 @@ li.plupload_droptext {
 	width: 70px;
 	height: 70px;
 }
+
+form.answers-sheet {
+
+}
+form.answers-sheet .answer-group {
+	padding: 10px;
+}
+.answer-group input[type=radio] {
+	float: left;
+	width: auto;
+	margin: 0 10px 0 0;
+	line-height: 40px;
+}
+.answer-group label{
+	display: block;
+}
