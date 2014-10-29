@@ -41,6 +41,17 @@
 		'controller' => 'users',
 		'action' => 'index'
 	));
+	Router::connect('/answers_sheets/:id',
+		array(
+			'controller' => 'answers_sheets',
+			'action' => 'index',
+			'id' => 0
+		),
+		array(
+			'pass' => array('id'),
+			'id' => '[0-9]+'
+		)
+	);
 	
 	Router::connect(ADMIN_ALIAS, array(
 		'controller' => 'home',
