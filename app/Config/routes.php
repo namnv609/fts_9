@@ -52,6 +52,10 @@
 			'id' => '[0-9]+'
 		)
 	);
+	Router::connect('/answers_sheets/save', array(
+		'controller' => 'answers_sheets',
+		'action' => 'save'
+	));
 	
 	Router::connect(ADMIN_ALIAS, array(
 		'controller' => 'home',

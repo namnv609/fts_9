@@ -6,7 +6,8 @@ class AnswersSheetsController extends AppController {
 		"Answer",
 		"AnswersSheet",
 		"Subject",
-		"UsersAnswer"
+		"UsersAnswer",
+		"Examination"
 	);
 	
 	public function index($id = 0) {
@@ -15,6 +16,12 @@ class AnswersSheetsController extends AppController {
 				"AnswersSheet.examination_id" => $id
 			),
 			"fields" => array("AnswersSheet.id", "AnswersSheet.question_id")
+		));
+		$examinationStatus = $this->Examination->find("list", array(
+			"conditions" => array(
+				"Examination.id" => $id
+			),
+			"fields" => array("Examination.id", "Examination.status")
 		));
 		$questions = $this->Answer->prepareQuestionsSheet($questionIDs);
 		$subjectID = $questions[key($questions)];
@@ -56,6 +63,21 @@ class AnswersSheetsController extends AppController {
 			1 => TRUE
 		);
 		
+		if ($this->Auth->user("admin") == 1) {
+			$this->layout = "admin";
+			$this->view = "admin_index";
+		} else {
+			$this->layout = "default";
+			if ($examinationStatus[$id] > 0) {
+				$isCorrect = array(
+					0 => __("Incorrect"),
+					1 => __("Correct")
+				);
+				
+				$this->view = "view";
+			}
+		}
+		
 		$this->set(
 			array(
 				"questions",
@@ -84,13 +106,23 @@ class AnswersSheetsController extends AppController {
 				$isCorrect
 			)
 		);
-		
-		if ($this->Auth->user("admin") == 1) {
-			$this->layout = "admin";
-			$this->view = "admin_index";
-		} else {
-			$this->layout = "default";
+	}
+	
+	public function save() {
+		if ($this->request->is("post")) {
+			$userAnswers = $this->request->data;
+			$this->UsersAnswer->set($userAnswers);
+			
+			if ($this->UsersAnswer->validates()) {
+				$answersSheet = $this->AnswersSheet->prepareUserAnswers($userAnswers);
+				
+				$this->Examination->save($userAnswers["Examination"]);
+				$this->UsersAnswer->create();
+				$this->UsersAnswer->saveMany($answersSheet);
+			} 
 		}
+		
+		$this->redirect('/');
 	}
 	
 	public function admin_check() {
